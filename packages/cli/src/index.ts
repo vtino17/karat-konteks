@@ -6,15 +6,15 @@ import {
   compilePack,
   diffManifests,
   verifyPack,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 import type {
   ContextManifest,
   HandoffPack,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 import {
   pinManifest,
   scanManifest,
-} from "@karatkonteks/runner";
+} from "@handoffseal/runner";
 import {
   formatAudit,
   formatDiff,
@@ -22,16 +22,16 @@ import {
 } from "./format.js";
 import { starterManifest } from "./template.js";
 
-const help = `KaratKonteks — context freshness and handoff compiler
+const help = `HandoffSeal — context freshness and handoff compiler
 
 Usage:
-  karat-konteks scan <manifest.json> [--workspace <dir>] [--json]
-  karat-konteks pin <manifest.json> --output <pinned.json> [--workspace <dir>]
-  karat-konteks pack <manifest.json> --output <handoff.md> --receipt <pack.json>
+  handoff-seal scan <manifest.json> [--workspace <dir>] [--json]
+  handoff-seal pin <manifest.json> --output <pinned.json> [--workspace <dir>]
+  handoff-seal pack <manifest.json> --output <handoff.md> --receipt <pack.json>
                        [--workspace <dir>] [--budget <tokens>] [--json]
-  karat-konteks verify-pack <pack.json> [--manifest <manifest.json>] [--json]
-  karat-konteks diff-manifest <old.json> <new.json> [--json]
-  karat-konteks init [context.manifest.json]
+  handoff-seal verify-pack <pack.json> [--manifest <manifest.json>] [--json]
+  handoff-seal diff-manifest <old.json> <new.json> [--json]
+  handoff-seal init [context.manifest.json]
 
 All source inspection is local. Existing output files are never overwritten.`;
 
@@ -176,7 +176,13 @@ async function initCommand(parsed: Parsed): Promise<number> {
 
 export async function run(args = process.argv.slice(2)): Promise<number> {
   const parsed = parseArgs(args);
-  if (!parsed.command || parsed.command === "help" || parsed.flags.has("help")) {
+  if (
+    !parsed.command ||
+    parsed.command === "help" ||
+    parsed.command === "--help" ||
+    parsed.command === "-h" ||
+    parsed.flags.has("help")
+  ) {
     process.stdout.write(`${help}\n`);
     return 0;
   }

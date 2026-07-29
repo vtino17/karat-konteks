@@ -3,12 +3,12 @@ import {
   assertManifest,
   auditContext,
   sha256,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 import type {
   ContextAudit,
   ContextManifest,
   SourceObservation,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 import { safePath } from "./path.js";
 
 const defaultMaxSourceBytes = 2_000_000;

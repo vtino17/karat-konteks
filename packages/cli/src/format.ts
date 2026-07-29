@@ -2,7 +2,7 @@ import type {
   ContextAudit,
   ManifestDiff,
   PackVerification,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 
 const statusLabel = {
   ready: "✓ READY",

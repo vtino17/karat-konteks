@@ -1,4 +1,4 @@
-import type { ContextManifest } from "@karatkonteks/core";
+import type { ContextManifest } from "@handoffseal/core";
 
 export const starterManifest: ContextManifest = {
   contextVersion: "1.0",
