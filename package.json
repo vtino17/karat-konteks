@@ -1,19 +1,19 @@
 {
-  "name": "karat-konteks",
+  "name": "handoff-seal",
   "version": "0.1.0",
   "private": true,
   "description": "Context freshness linter and budget-aware handoff compiler for AI agents.",
   "type": "module",
   "packageManager": "pnpm@10.14.0",
   "scripts": {
-    "build": "pnpm --filter @karatkonteks/core build && pnpm --filter @karatkonteks/runner build && pnpm --filter @karatkonteks/cli build && pnpm --filter @karatkonteks/studio build",
-    "dev": "pnpm --filter @karatkonteks/studio dev",
+    "build": "pnpm --filter @handoffseal/core build && pnpm --filter @handoffseal/runner build && pnpm --filter @handoffseal/cli build && pnpm --filter @handoffseal/studio build",
+    "dev": "pnpm --filter @handoffseal/studio dev",
     "lint": "eslint .",
     "typecheck": "tsc -b packages/core/tsconfig.build.json packages/runner/tsconfig.build.json packages/cli/tsconfig.build.json && tsc -p apps/studio/tsconfig.json --noEmit",
     "test": "vitest run",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
-    "prekarat": "pnpm --filter @karatkonteks/core build && pnpm --filter @karatkonteks/runner build && pnpm --filter @karatkonteks/cli build",
-    "karat": "node packages/cli/dist/index.js"
+    "preseal": "pnpm --filter @handoffseal/core build && pnpm --filter @handoffseal/runner build && pnpm --filter @handoffseal/cli build",
+    "seal": "node packages/cli/dist/index.js"
   },
   "engines": {
     "node": ">=20"

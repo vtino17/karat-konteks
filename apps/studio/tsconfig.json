@@ -8,7 +8,7 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@karatkonteks/core": ["../../packages/core/src/index.ts"]
+      "@handoffseal/core": ["../../packages/core/src/index.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]

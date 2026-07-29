@@ -4,4 +4,4 @@ coverage/
 .DS_Store
 *.log
 *.tsbuildinfo
-.karat/
+.handoff-seal/

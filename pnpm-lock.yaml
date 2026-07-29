@@ -32,7 +32,7 @@ importers:
 
   apps/studio:
     dependencies:
-      '@karatkonteks/core':
+      '@handoffseal/core':
         specifier: workspace:*
         version: link:../../packages/core
       react:
@@ -57,10 +57,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@karatkonteks/core':
+      '@handoffseal/core':
         specifier: workspace:*
         version: link:../core
-      '@karatkonteks/runner':
+      '@handoffseal/runner':
         specifier: workspace:*
         version: link:../runner
 
@@ -68,7 +68,7 @@ importers:
 
   packages/runner:
     dependencies:
-      '@karatkonteks/core':
+      '@handoffseal/core':
         specifier: workspace:*
         version: link:../core
 

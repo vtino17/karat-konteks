@@ -3,11 +3,11 @@ import {
   auditContext,
   compilePack,
   validateManifest,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 import type {
   ContextManifest,
   HandoffPack,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 import { sampleManifest, sampleObservations } from "./sample.js";
 
 const stringify = (value: unknown) => JSON.stringify(value, null, 2);
@@ -80,8 +80,8 @@ export function App() {
     <main>
       <header className="site-header">
         <a className="brand" href="#">
-          <span className="brand-mark">KK</span>
-          <span>KaratKonteks</span>
+          <span className="brand-mark">HS</span>
+          <span>HandoffSeal</span>
           <small>Freshness Studio</small>
         </a>
         <div className="local">
@@ -93,11 +93,11 @@ export function App() {
       <section className="hero">
         <div>
           <span className="overline">CONTEXT HYGIENE FOR LONG-RUNNING AGENTS</span>
-          <h1>Konteks juga<br />bisa berkarat.</h1>
+          <h1>Context can<br />go stale, too.</h1>
         </div>
         <p>
-          Jangan teruskan asumsi lama ke agent berikutnya. Audit freshness,
-          konflik, dan pemborosan token sebelum membuat handoff.
+          Do not pass stale assumptions to the next agent. Audit freshness,
+          conflicts, and token waste before creating a handoff.
         </p>
       </section>
 
@@ -233,7 +233,7 @@ export function App() {
       </section>
 
       <footer className="site-footer">
-        <span>KARATKONTEKS / CONTEXT FRESHNESS PROTOCOL</span>
+        <span>HANDOFFSEAL / CONTEXT FRESHNESS PROTOCOL</span>
         <span>No model · no upload · deterministic selection</span>
       </footer>
     </main>

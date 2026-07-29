@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import type { ContextManifest } from "@karatkonteks/core";
+import type { ContextManifest } from "@handoffseal/core";
 import { pinManifest, scanManifest } from "./observe.js";
 
 function manifest(path: string): ContextManifest {
@@ -31,7 +31,7 @@ function manifest(path: string): ContextManifest {
 
 describe("local context observer", () => {
   it("pins file content and passes a subsequent freshness scan", async () => {
-    const workspace = await mkdtemp(join(tmpdir(), "karat-observe-"));
+    const workspace = await mkdtemp(join(tmpdir(), "handoff-seal-observe-"));
     await writeFile(join(workspace, "RULES.md"), "Use pnpm.\n", "utf8");
     const pinned = await pinManifest(manifest("RULES.md"), {
       workspace,
@@ -47,7 +47,7 @@ describe("local context observer", () => {
   });
 
   it("detects broken @file references", async () => {
-    const workspace = await mkdtemp(join(tmpdir(), "karat-reference-"));
+    const workspace = await mkdtemp(join(tmpdir(), "handoff-seal-reference-"));
     await writeFile(
       join(workspace, "HANDOFF.md"),
       "Read @docs/missing.md before continuing.\n",
@@ -68,7 +68,7 @@ describe("local context observer", () => {
   });
 
   it("rejects traversal outside the workspace", async () => {
-    const workspace = await mkdtemp(join(tmpdir(), "karat-traversal-"));
+    const workspace = await mkdtemp(join(tmpdir(), "handoff-seal-traversal-"));
     const result = await scanManifest(manifest("../outside.md"), {
       workspace,
       now: new Date("2026-07-29T02:00:00.000Z"),

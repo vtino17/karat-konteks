@@ -1,18 +1,18 @@
 {
-  "name": "@karatkonteks/cli",
+  "name": "@handoffseal/cli",
   "version": "0.1.0",
   "description": "CLI for context freshness audits and handoff pack compilation.",
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "karat-konteks": "./dist/index.js"
+    "handoff-seal": "./dist/index.js"
   },
   "files": ["dist"],
   "scripts": {
     "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@karatkonteks/core": "workspace:*",
-    "@karatkonteks/runner": "workspace:*"
+    "@handoffseal/core": "workspace:*",
+    "@handoffseal/runner": "workspace:*"
   }
 }

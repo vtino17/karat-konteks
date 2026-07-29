@@ -1,4 +1,4 @@
-# KaratKonteks
+# HandoffSeal
 
 **Context freshness linter and budget-aware handoff compiler for AI agents.**
 
@@ -6,22 +6,21 @@ Long-running agents accumulate instructions, state summaries, copied notes, and
 old decisions. A larger context window does not guarantee that this information
 is current or mutually consistent.
 
-KaratKonteks inventories context as a manifest, checks freshness and content
+HandoffSeal inventories context as a manifest, checks freshness and content
 drift, resolves structured claim conflicts by authority, finds redundant
 sources, and compiles a minimal verifiable handoff pack.
 
-> **Bahasa Indonesia:** KaratKonteks mencegah agent baru menerima asumsi basi.
-> Ia memeriksa umur, hash, konflik, referensi rusak, dan pemborosan token sebelum
-> konteks diteruskan.
+It gives the receiving agent a compact, inspectable context bundle instead of
+an opaque summary or an unchecked copy of the previous session.
 
 ## Why this is different
 
 Agent package managers make prompts and skills reproducible. Memory frameworks
-store and retrieve prior information. KaratKonteks focuses on a different
+store and retrieve prior information. HandoffSeal focuses on a different
 boundary: **should this exact context still be trusted and carried into the next
 session?**
 
-| Capability | KaratKonteks | Agent package manager | Memory/RAG | Chat summary |
+| Capability | HandoffSeal | Agent package manager | Memory/RAG | Chat summary |
 | --- | --- | --- | --- | --- |
 | Per-source TTL and content pin | Yes | Version-oriented | Varies | No |
 | Required source fail-closed | Yes | Dependency failure | No | No |
@@ -37,9 +36,9 @@ and deterministic handoff compilation.
 
 ## Included
 
-- `@karatkonteks/core`: audit, similarity, claim conflicts, pack compiler, diff,
+- `@handoffseal/core`: audit, similarity, claim conflicts, pack compiler, diff,
   and receipt verification;
-- `@karatkonteks/runner`: safe local file observation, `@file` reference checks,
+- `@handoffseal/runner`: safe local file observation, `@file` reference checks,
   and manifest pinning;
 - CLI for scan, pin, pack, verify-pack, diff-manifest, and init;
 - local React Studio for visual audit and pack rehearsal;
@@ -51,8 +50,8 @@ and deterministic handoff compilation.
 Requirements: Node.js 20+ and pnpm 10.
 
 ```bash
-git clone https://github.com/vtino17/karat-konteks.git
-cd karat-konteks
+git clone https://github.com/vtino17/handoff-seal.git
+cd handoff-seal
 corepack enable
 pnpm install
 pnpm check
@@ -61,19 +60,19 @@ pnpm check
 Audit the example:
 
 ```bash
-pnpm karat scan examples/context/fresh-handoff.json \
+pnpm seal scan examples/context/fresh-handoff.json \
   --workspace examples/workspace
 ```
 
 Compile and verify a handoff:
 
 ```bash
-pnpm karat pack examples/context/fresh-handoff.json \
+pnpm seal pack examples/context/fresh-handoff.json \
   --workspace examples/workspace \
-  --output .karat/handoff.md \
-  --receipt .karat/handoff.pack.json
+  --output .handoff-seal/handoff.md \
+  --receipt .handoff-seal/handoff.pack.json
 
-pnpm karat verify-pack .karat/handoff.pack.json \
+pnpm seal verify-pack .handoff-seal/handoff.pack.json \
   --manifest examples/context/fresh-handoff.json
 ```
 
@@ -89,7 +88,7 @@ Unpinned context can still be audited, but it receives a warning. Create a new
 manifest with current SHA-256 hashes and timestamps:
 
 ```bash
-pnpm karat pin context.manifest.json \
+pnpm seal pin context.manifest.json \
   --workspace . \
   --output context.pinned.json
 ```
@@ -99,7 +98,7 @@ Existing files are never overwritten.
 ## Context drift review
 
 ```bash
-pnpm karat diff-manifest \
+pnpm seal diff-manifest \
   examples/context/fresh-handoff.json \
   examples/context/weakened-handoff.json
 ```
@@ -151,7 +150,7 @@ docs/              Protocol and security guidance
 
 ## Status
 
-KaratKonteks is an experimental reference implementation. It can show that
+HandoffSeal is an experimental reference implementation. It can show that
 context is fresh relative to its manifest; it cannot prove that the information
 is true or that the manifest author assigned authority correctly.
 

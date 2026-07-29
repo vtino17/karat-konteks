@@ -26,7 +26,7 @@
 
 ## Out of scope
 
-KaratKonteks does not determine whether content is factually true, safe, or free
+HandoffSeal does not determine whether content is factually true, safe, or free
 from prompt injection. Authority is declared by the manifest author, not
 cryptographically proven.
 

@@ -1,6 +1,6 @@
 # Audit model
 
-KaratKonteks performs four independent checks.
+HandoffSeal performs four independent checks.
 
 ## Freshness and integrity
 

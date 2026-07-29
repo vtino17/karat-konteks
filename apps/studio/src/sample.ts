@@ -1,7 +1,7 @@
 import type {
   ContextManifest,
   SourceObservation,
-} from "@karatkonteks/core";
+} from "@handoffseal/core";
 
 const rules =
   "Use pnpm for package operations. Run the full quality gate before commit. The API listens on port 4100.";
