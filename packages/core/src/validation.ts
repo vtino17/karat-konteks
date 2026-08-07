@@ -11,6 +11,18 @@ function hasText(record: Record<string, unknown>, key: string): boolean {
   return typeof record[key] === "string" && record[key].trim().length > 0;
 }
 
+function isJsonValue(value: unknown, ancestors = new Set<object>()): boolean {
+  if (value === null || typeof value === "string" || typeof value === "boolean") return true;
+  if (typeof value === "number") return Number.isFinite(value);
+  if (typeof value !== "object" || ancestors.has(value)) return false;
+  ancestors.add(value);
+  const valid = Array.isArray(value)
+    ? value.every((entry) => isJsonValue(entry, ancestors))
+    : Object.values(value).every((entry) => isJsonValue(entry, ancestors));
+  ancestors.delete(value);
+  return valid;
+}
+
 function issue(
   issues: ValidationIssue[],
   path: string,
@@ -99,6 +111,7 @@ export function validateManifest(value: unknown): ValidationIssue[] {
     }
     if (
       typeof source.authority !== "number" ||
+      !Number.isFinite(source.authority) ||
       source.authority < 0 ||
       source.authority > 100
     ) {
@@ -122,12 +135,12 @@ export function validateManifest(value: unknown): ValidationIssue[] {
             !isRecord(claim) ||
             !hasText(claim, "subject") ||
             !hasText(claim, "predicate") ||
-            claim.value === undefined
+            !isJsonValue(claim.value)
           ) {
             issue(
               issues,
               `${path}.claims[${claimIndex}]`,
-              "Must include subject, predicate, and value.",
+              "Must include subject, predicate, and a JSON-compatible finite value.",
             );
           }
         });
