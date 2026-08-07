@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { sha256 } from "./canonical.js";
 import { auditContext } from "./audit.js";
+import { validateManifest } from "./validation.js";
 import type {
   ContextManifest,
   SourceObservation,
@@ -89,5 +90,15 @@ describe("context audit", () => {
 
     expect(audit.status).toBe("blocked");
     expect(audit.sources[0]?.status).toBe("drifted");
+  });
+
+  it("rejects non-finite authority and claim values", async () => {
+    const { manifest } = await fixture();
+    manifest.sources[0]!.authority = Number.NaN;
+    manifest.sources[0]!.claims![0]!.value = Number.POSITIVE_INFINITY;
+
+    const paths = validateManifest(manifest).map((entry) => entry.path);
+    expect(paths).toContain("sources[0].authority");
+    expect(paths).toContain("sources[0].claims[0]");
   });
 });
